@@ -18,10 +18,22 @@ public class ExampleStatemachine implements IExampleStatemachine {
 			white = true;
 		}
 		
-		private boolean black;
+		private boolean white2;
 		
-		public void raiseBlack() {
-			black = true;
+		public void raiseWhite2() {
+			white2 = true;
+		}
+		
+		private boolean gray;
+		
+		public void raiseGray() {
+			gray = true;
+		}
+		
+		private boolean notgray;
+		
+		public void raiseNotgray() {
+			notgray = true;
 		}
 		
 		private long whiteTime;
@@ -34,20 +46,22 @@ public class ExampleStatemachine implements IExampleStatemachine {
 			this.whiteTime = value;
 		}
 		
-		private long blackTime;
+		private long white2Time;
 		
-		public long getBlackTime() {
-			return blackTime;
+		public long getWhite2Time() {
+			return white2Time;
 		}
 		
-		public void setBlackTime(long value) {
-			this.blackTime = value;
+		public void setWhite2Time(long value) {
+			this.white2Time = value;
 		}
 		
 		protected void clearEvents() {
 			start = false;
 			white = false;
-			black = false;
+			white2 = false;
+			gray = false;
+			notgray = false;
 		}
 	}
 	
@@ -86,7 +100,7 @@ public class ExampleStatemachine implements IExampleStatemachine {
 		clearOutEvents();
 		sCInterface.setWhiteTime(60);
 		
-		sCInterface.setBlackTime(60);
+		sCInterface.setWhite2Time(60);
 	}
 	
 	public void enter() {
@@ -211,8 +225,16 @@ public class ExampleStatemachine implements IExampleStatemachine {
 		sCInterface.raiseWhite();
 	}
 	
-	public void raiseBlack() {
-		sCInterface.raiseBlack();
+	public void raiseWhite2() {
+		sCInterface.raiseWhite2();
+	}
+	
+	public void raiseGray() {
+		sCInterface.raiseGray();
+	}
+	
+	public void raiseNotgray() {
+		sCInterface.raiseNotgray();
 	}
 	
 	public long getWhiteTime() {
@@ -223,12 +245,12 @@ public class ExampleStatemachine implements IExampleStatemachine {
 		sCInterface.setWhiteTime(value);
 	}
 	
-	public long getBlackTime() {
-		return sCInterface.getBlackTime();
+	public long getWhite2Time() {
+		return sCInterface.getWhite2Time();
 	}
 	
-	public void setBlackTime(long value) {
-		sCInterface.setBlackTime(value);
+	public void setWhite2Time(long value) {
+		sCInterface.setWhite2Time(value);
 	}
 	
 	/* Entry action for state 'Black'. */
@@ -345,13 +367,13 @@ public class ExampleStatemachine implements IExampleStatemachine {
 		
 		if (try_transition) {
 			if (react()==false) {
-				if (sCInterface.black) {
+				if (sCInterface.white2) {
 					exitSequence_main_region_Black();
 					enterSequence_main_region_White_default();
 				} else {
 					if (timeEvents[0]) {
 						exitSequence_main_region_Black();
-						sCInterface.setBlackTime(sCInterface.getBlackTime() - 1);
+						sCInterface.setWhite2Time(sCInterface.getWhite2Time() - 1);
 						
 						enterSequence_main_region_Black_default();
 					} else {
